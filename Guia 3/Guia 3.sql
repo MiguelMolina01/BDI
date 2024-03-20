@@ -1,0 +1,140 @@
+create database Biblioteca;
+use biblioteca;
+
+create table departamentos(
+	idDepartamento char(2) primary key,
+    departamento varchar(25) not null,
+    pais varchar(25)
+); 
+
+create table municipios(
+	idMunicipio char(3) primary key,
+    municipio varchar(30)not null,
+    idDepartamento char(2) not null
+);
+
+create table distritos(
+	idDistrito char(5) primary key,
+    distrito varchar(50) not null,
+    idMunicipio char(3) not null
+ );
+ 
+ create table direcciones(
+	idDireccion int primary key auto_increment,
+    linea1 varchar(100) not null,
+    linea2 varchar(50),
+    idDistrito char(5),
+    codigoPostal varchar(7)
+);
+
+alter table municipios add foreign key (idDepartamento) references departamentos(idDepartamento);
+alter table distritos add foreign key (idMunicipio) references municipios(idMunicipio);
+alter table direcciones add foreign key (idDistrito) references distritos(idDistrito);
+
+create table cargos(
+	idCargo char(2) primary key,
+    cargo varchar(25) not null
+);
+
+create table empleados(
+	idempleado char(2) primary key,
+    nombresEmpleados varchar(100) not null,
+    apellidoEmpleados varchar(100) not null,
+    duiEmpleado char(10) not null,
+    isssEmpleado char(9),
+    fechanacEmpleado date not null,
+    telefonoEmpleado varchar(15),
+    correoEmpleado varchar(100)not null,
+    idCargo char(2)not null,
+    idDireccion int not null
+ );
+ alter table Empleados add foreign key (idCargo) references cargos(idCargo);
+ alter table Empleados add foreign key (idDireccion) references direcciones(idDireccion);
+ 
+ create table lectores(
+	idLector char(2) primary key,
+    nombreLector varchar(45) not null,
+    apellidoLector varchar(45) not null
+ );
+ 
+ create table historialPrestamos(
+	idHistorial char(2) primary key,
+    fechaEntregado date not null,
+    fechaRecibido date not null
+ );
+  create table prestamos(
+	idPrestamo char(2) primary key,
+    fechaPrestamo date not null,
+    fechaDevolucion date not null,
+    idHistorial char(2) not null,
+    idEmpleado char(2) not null,
+    idLector char(2) not null
+ );
+ alter table prestamos add foreign key (idEmpleado) references empleados(idEmpleado);
+ alter table prestamos add foreign key (idLector) references lectores(idLector);
+ alter table prestamos add foreign key (idHistorial) references historialPrestamos(idHistorial);
+ 
+CREATE TABLE pagoMoras(
+  idPagoMora CHAR(2) primary key,
+  cantidadPago VARCHAR(45) NOT NULL
+);
+
+CREATE TABLE moras (
+  idMora CHAR(2) primary key,
+  mora VARCHAR(45) NOT NULL,
+  idPagoMora CHAR(2) NOT NULL,
+  idPrestamo CHAR(2) NOT NULL
+);
+alter table moras add foreign key (idPagoMora) references pagoMoras(idPagoMora);
+alter table moras add foreign key (idPrestamo) references prestamos(idPrestamo);
+
+CREATE TABLE autores(
+  idAutor CHAR(2) primary key,
+  nombreAutor VARCHAR(45) NOT NULL,
+  apellidoAutor VARCHAR(45) NOT NULL
+ );
+ 
+CREATE TABLE categoriaLibros(
+  idCategoria CHAR(2) primary key,
+  categoria1 VARCHAR(45) NOT NULL,
+  categoria2 VARCHAR(45) not NULL
+  );
+  
+CREATE TABLE editoriales(
+  idEditorial INT primary key,
+  editorial VARCHAR(45) NOT NULL,
+  fechaPublicacion DATE NOT NULL
+);
+
+CREATE TABLE condicionLibros(
+  idCondicion CHAR(2) primary key,
+  condicion VARCHAR(45) NOT NULL,
+  ISBN CHAR(13) NOT NULL
+  );
+
+CREATE TABLE libros (
+  ISBN CHAR(13) primary key,
+  libro VARCHAR(100) NOT NULL,
+  estado VARCHAR(45) NOT NULL,
+  idEditorial INT NOT NULL,
+  idCategoria CHAR(2) NOT NULL,
+  idPrestamo CHAR(2) NOT NULL
+);
+
+CREATE TABLE autores_libros (
+  ISBN CHAR(13) NOT NULL,
+  idAutor CHAR(2) NOT NULL,
+  primary key (ISBN, idAutor)
+);
+
+alter table libros add foreign key (idCategoria) references categoriaLibros(idCategoria);
+alter table libros add foreign key (idPrestamo) references prestamos(idPrestamo);
+alter table libros add foreign key (idEditorial) references editoriales(idEditorial);
+alter table condicionlibros add foreign key (ISBN) references libros(ISBN);
+
+alter table autores_libros add foreign key (ISBN) references libros(ISBN);
+alter table autores_libros add foreign key (idAutor) references autores(idAutor);
+
+
+
+
