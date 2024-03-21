@@ -107,9 +107,8 @@ CREATE TABLE editoriales(
 );
 
 CREATE TABLE condicionLibros(
-  idCondicion CHAR(2) primary key,
-  condicion VARCHAR(45) NOT NULL,
-  ISBN CHAR(13) NOT NULL
+  idCondicionLibro CHAR(2) primary key,
+  condicion VARCHAR(45) NOT NULL
   );
 
 CREATE TABLE libros (
@@ -118,23 +117,28 @@ CREATE TABLE libros (
   estado VARCHAR(45) NOT NULL,
   idEditorial INT NOT NULL,
   idCategoria CHAR(2) NOT NULL,
-  idPrestamo CHAR(2) NOT NULL
+  idCondicionLibro CHAR(2) NOT NULL
 );
 
-CREATE TABLE autores_libros (
-  ISBN CHAR(13) NOT NULL,
-  idAutor CHAR(2) NOT NULL,
-  primary key (ISBN, idAutor)
+create table prestamoLibro(
+idPrestamoLibro int primary key,
+ISBN char(13)not null,
+idPrestamo char(2) not null
+);
+
+alter table prestamoLibro add foreign key (ISBN) references libros(ISBN);
+alter table prestamoLibro add foreign key (idPrestamo) references prestamos(idPrestamo);
+
+
+CREATE TABLE autoreslibros (
+  idAutoresLibro int primary key,
+  idAutor char(2)not null,
+  ISBN char(13)not null
 );
 
 alter table libros add foreign key (idCategoria) references categoriaLibros(idCategoria);
-alter table libros add foreign key (idPrestamo) references prestamos(idPrestamo);
 alter table libros add foreign key (idEditorial) references editoriales(idEditorial);
-alter table condicionlibros add foreign key (ISBN) references libros(ISBN);
+alter table libros add foreign key (idCondicionLibro) references condicionLibros(idCondicionLibro);
 
-alter table autores_libros add foreign key (ISBN) references libros(ISBN);
-alter table autores_libros add foreign key (idAutor) references autores(idAutor);
-
-
-
-
+alter table autoresLibros add foreign key (ISBN) references libros(ISBN);
+alter table autoresLibros add foreign key (idAutor) references autores(idAutor);
