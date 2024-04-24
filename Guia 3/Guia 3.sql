@@ -54,8 +54,13 @@ create table empleados(
  create table lectores(
 	idLector char(2) primary key,
     nombreLector varchar(45) not null,
-    apellidoLector varchar(45) not null
+    apellidoLector varchar(45) not null,
+    duiLector char(10) not null,
+    telefonoLector varchar(15),
+    idDireccion int not null
  );
+ 
+ alter table lectores add foreign key (idDireccion) references direcciones(idDireccion);
  
  create table historialPrestamos(
 	idHistorial char(2) primary key,
