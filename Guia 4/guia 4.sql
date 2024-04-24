@@ -356,7 +356,8 @@ insert into distritos values
 insert into cargos values
 	('1','SysAdmin'),
 	('2','Bibliotecario'),
-	('3','Ordenanza');
+	('3','RRHH'),
+	('4','Ordenanza');
     
     insert into empleados values
 -- idEmpleado, nombresEmpleado, apellidosEmpleado, duiEmpleado, isssEmpleado,  fechaNacEmpleado, telefonoEmpleado, correoEmpleado, idCargo, idDireccion
@@ -364,15 +365,15 @@ insert into cargos values
 	('2', 'Diego Franciso', 'Sanchez Castro', '04321098-7', '963852741', '1990-02-02', '7895-5698', 'diego@gmail.com', '2', '2'),
 	('3', 'Raul Edgardo', 'Del Valle Garcia', '03210987-4', '321654987', '1980-03-03', '6598-2548', 'raul@outlook.com', '3', '3'),
 	('4', 'Mary Carmen', 'Perez de Hernandez', '06789012-1', '951753258', '1985-04-04', '7965-2526', 'may@yahoo.com', '2', '4'),
-	('5', 'Kevin Angel', 'Luke de Quevedo', '06776012-5', '871563254', '1986-03-07', '7645-2526', 'kaq@yahoo.com', '3', '5');
+	('5', 'Kevin Angel', 'Luke de Quevedo', '06776012-5', '871563254', '1986-03-07', '7645-2526', 'kaq@yahoo.com', '4', '5');
     
     insert into lectores values
-    -- idLector, nombreLector, ApellidoLector
-    ('1', 'Diego Alejandro', 'Herrera Moreno'),
-    ('2', 'Laura Camila', ' Castro Escobar'),
-    ('3', 'Jose Maria', 'Ramírez Tovar'),
-    ('4', 'Gabriel Antonio', 'García Beltrán'),
-    ('5', 'García Beltrán', 'Romero Jiménez');
+    -- idLector, nombreLector, ApellidoLector, DuiLector, TelefonoLector, idDireccion
+    ('1', 'Diego Alejandro', 'Herrera Moreno', '04529395-6', '7632-4526',1),
+    ('2', 'Laura Camila', ' Castro Escobar', '04529895-2', '6872-4526',2),
+    ('3', 'Jose Maria', 'Ramírez Tovar', '07823695-7', '5532-8926',3),
+    ('4', 'Gabriel Antonio', 'García Beltrán', '04783695-1', '7532-6526',4),
+    ('5', 'García Beltrán', 'Romero Jiménez', '06523695-5', '7532-9826',5);
     
     insert into historialPrestamos values
     -- idHistorial, fechaEntregado, fechaRecibido
