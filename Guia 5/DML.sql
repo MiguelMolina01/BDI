@@ -460,7 +460,6 @@ insert into roles (rol) values
 	 ('SysAdmin'), -- 1
 	 ('Bibliotecario'), -- 2
 	 ('RRHH');  -- 3
-     select * from roles;
      
 insert into usuarios (usuario, contrasenia, idRol, idEmpleado) values
 	('admin_juancarlos', 'root', '1', '1'), -- Administrador

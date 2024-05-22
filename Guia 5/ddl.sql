@@ -2,28 +2,28 @@ create database Biblioteca;
 use biblioteca;
 
 create table departamentos(
-	idDepartamento int primary key,
+	idDepartamento char(2) primary key,
     departamento varchar(25) not null,
     pais varchar(25)
 ); 
 
 create table municipios(
-	idMunicipio int primary key,
+	idMunicipio char(3) primary key,
     municipio varchar(30)not null,
-    idDepartamento int(2) not null
+    idDepartamento char(2) not null
 );
 
 create table distritos(
-	idDistrito int primary key,
+	idDistrito char(5) primary key,
     distrito varchar(50) not null,
-    idMunicipio int(3) not null
+    idMunicipio char(3) not null
  );
  
  create table direcciones(
 	idDireccion int primary key auto_increment,
     linea1 varchar(100) not null,
     linea2 varchar(50),
-    idDistrito int(5),
+    idDistrito char(5),
     codigoPostal varchar(7)
 );
 
@@ -40,7 +40,7 @@ create table empleados(
 	idempleado int primary key,
     nombresEmpleados varchar(100) not null,
     apellidoEmpleados varchar(100) not null,
-    duiEmpleado char(9) not null,
+    duiEmpleado char(10) not null,
     isssEmpleado char(9),
     fechanacEmpleado date not null,
     telefonoEmpleado varchar(15),
@@ -55,7 +55,7 @@ create table empleados(
 	idLector int primary key,
     nombreLector varchar(45) not null,
     apellidoLector varchar(45) not null,
-    duiLector char(9) not null,
+    duiLector char(10) not null,
     telefonoLector varchar(15),
     idDireccion int not null
  );
